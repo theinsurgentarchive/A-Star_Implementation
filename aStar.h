@@ -3,6 +3,7 @@
 class AStar
 {
     private:
+        
     public:
         
 };
