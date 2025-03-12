@@ -3,14 +3,18 @@
 #include "aStar.h"
 using namespace std;
 
-//Function Prototypes
-void printGrid(Grid*, string[]);
+//Function Prototype
+void printGrid(Grid&, string[]);
 
 int main(int argc, char* argv[])
 {
-    //get size of grid
+    //Grid Size
     int g_x, g_y;
+
+    //Starting & Goal Nodes
     int init_node[2], goal_node[2];
+    
+    //Set Either Grid Size or Start and Goal Nodes based on passed parameters
     if (argc == 5) {
         g_x = 30;
         g_y = 30;
@@ -22,6 +26,7 @@ int main(int argc, char* argv[])
         g_x = stoi(argv[1]);
         g_y = stoi(argv[2]);
     } else if ((argc <= 1) || (argc == 4 || argc > 5)){
+        //Print Usage Cases if incorrect parameters
         cout << "Usage: ./astar <int Size:X> <int Size:Y>\n"
                 << "\t|OR|\n"
                 << "Usage: ./astar <int Pos1:X> <int Pos1:Y>"
@@ -32,8 +37,10 @@ int main(int argc, char* argv[])
         g_y = 30;
     };
     
-    //Generate Grids
+    //Node Grid
     Grid world(g_x, g_y);
+
+    //Print Grid
     string** console = new string *[g_x];
     for (int i = 0; i < g_x; i++) {
         console[i] = new string [g_y];
@@ -70,7 +77,8 @@ int main(int argc, char* argv[])
 void printGrid(Grid& grid_ptr, string console[])
 {
     int g_x, g_y;
-    g_x, g_y = grid_ptr.getSize();
+    g_x = grid_ptr.getSizeX();
+    g_y = grid_ptr.getSizeY();
     for (int i = 0; i < g_x; i++) {
         cout << "| ";
         for (int j = 0; j < g_y; j++) {

@@ -38,16 +38,34 @@ Grid::Grid()
     initGrid();
 }
 
+Grid::Grid(int x_size, int y_size)
+{
+    size[0] = x_size;
+    size[1] = y_size;
+
+    //Initalize Grid Nodes
+    initGrid();
+}
+
+//Sets The Given Coordinate's Node to an Obstacle
 void Grid::setObstacle(int x, int y)
 {
     node_grid[x][y].obstacle = true;
 }
 
-int Grid::getSize()
+//Return Grid's X-Axis Size
+int Grid::getSizeX()
 {
-    return size[0], size[1];
+    return size[0];
 }
 
+//Return Grid's Y-Axis Size
+int Grid::getSizeY()
+{
+    return size[1];
+}
+
+//Generate Node Grid, Set Node Positions
 void Grid::initGrid()
 {
     node_grid = new Node *[size[0]];
@@ -58,15 +76,6 @@ void Grid::initGrid()
             node_grid[i][j].pos[1] = j;
         }
     }
-}
-
-Grid::Grid(int x_size, int y_size)
-{
-    size[0] = x_size;
-    size[1] = y_size;
-
-    //Initalize Grid Nodes
-    initGrid();
 }
 
 Grid::~Grid()
