@@ -8,6 +8,7 @@ class Grid
         {
             public:
                 bool obstacle, visited;
+                float dist[2];
                 int pos[2];
                 Node();
                 Node(int, int);
@@ -15,13 +16,18 @@ class Grid
                 std::vector<Node*> neighbors;
                 Node* parent;
         };
-        Node** node_grid;
     public:
+        //Variables
+        Node** node_grid;
+        
+        //Functions
         Grid();
         Grid(int, int);
         void setObstacle(int, int);
+        int getSize();
         void initGrid();
         ~Grid();
 };
 
+//A* Search Algorithm
 void aStar(Grid, int[2], int[2]);

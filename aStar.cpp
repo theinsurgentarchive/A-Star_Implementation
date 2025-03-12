@@ -43,6 +43,11 @@ void Grid::setObstacle(int x, int y)
     node_grid[x][y].obstacle = true;
 }
 
+int Grid::getSize()
+{
+    return size[0], size[1];
+}
+
 void Grid::initGrid()
 {
     node_grid = new Node *[size[0]];
@@ -70,7 +75,6 @@ Grid::~Grid()
         delete [] node_grid[i];
     }
     delete [] node_grid;
-    
 }
 
 void aStar(Grid grid, int begin[2], int ending[2])
