@@ -1,12 +1,14 @@
 #include "aStar.h"
+#include <cmath>
+#include <list>
 
 Node::Node()
 {
     //Initialize Variables
     obstacle = false;
     visited = false;
-    init_dist = 0;
-    goal_dist = 0;
+    local_dist = 0;
+    global_dist = 0;
     parent = nullptr;
 }
 
@@ -15,8 +17,8 @@ Node::Node(bool isObstacle)
     //Initialize Variables
     obstacle = isObstacle;
     visited = false;
-    init_dist = 0;
-    goal_dist = 0;
+    local_dist = 0;
+    global_dist = 0;
     parent = nullptr;
 }
 
@@ -60,7 +62,9 @@ int Grid::getSizeY()
 //Retrieves The Node requested in the Grid
 Node* Grid::getNode(int x, int y)
 {
-    return &node_grid[x][y];
+    if ((grid_size[0] > x) && (grid_size[1] > y)) {
+        return &node_grid[x][y];
+    }
 }
 
 //Generate Node Grid, Set Node Positions
@@ -68,14 +72,22 @@ void Grid::initGrid()
 {
     //Generate Nodes
     node_grid = new Node *[grid_size[0]];
-    for (int i = 0; i < grid_size[0]; i++) {
-        node_grid[i] = new Node [grid_size[1]];
+    for (int x = 0; x < grid_size[0]; x++) {
+        node_grid[x] = new Node [grid_size[1]];
+        for (int y = 0; y < grid_size[1]; y++) {
+            node_grid[x][y].x = x;
+            node_grid[x][y].y = y;
+        }
     }
 
     //Fill Each Node's Neighbors Vector Matrix
+    genNeighbors();
+}
+
+void Grid::genNeighbors()
+{
     for (int x = 0; x < grid_size[0]; x++) {
         for (int y = 0; y < grid_size[1]; y++) {
-            
             //Load All Y-Axis Neighbors into The Node's Vector Matrix
             if (y > 0) {
                 node_grid[x][y].neighbors.push_back(
@@ -123,19 +135,19 @@ void Grid::initGrid()
             }
         }
     }
-    
 }
 
 Grid::~Grid()
 {
-    for (int i = 0; i < grid_size[0]; i++) {
-        delete [] node_grid[i];
+    for (int x = 0; x < grid_size[0]; x++) {
+        delete [] node_grid[x];
     }
     delete [] node_grid;
 }
 
-void aStar(Grid grid, int begin_node[], int ending_node[])
+void aStar(Grid& grid, int begin_node[], int ending_node[])
 {
+
     //Retrieve Pointer to Start Node
     Node* start = grid.getNode(
         begin_node[0],
@@ -148,5 +160,99 @@ void aStar(Grid grid, int begin_node[], int ending_node[])
         ending_node[1]
     );
 
+    //Reset All Nodes to Default
+    resetNodes(grid);
 
+    //Initialize Start Node
+    start->local_dist = 0.0f;
+    start->global_dist = heuristic(start, goal);
+
+    //Initialize Goal Node
+    goal->local_dist = start->global_dist;
+    start->global_dist = 0.0f;
+
+    //Set Current Node to the Start Node
+    Node* current = start;
+
+    //Initialize Array of Untested Nodes
+    std::list<Node*> untestedNodes;
+    untestedNodes.push_back(start);
+
+    //Primary Algorithm Loop
+    while (!untestedNodes.empty()) {
+        //Sort the list from least to greatest distance from the Goal
+        untestedNodes.sort(
+            //This is a Lambda function, which is a unnamed function call
+            [](const Node* a, const Node* b)
+            {
+                return a->global_dist < b->global_dist;
+            }
+        );
+        
+        //If the best Node has been visited, pop it from the list
+        while ((!untestedNodes.empty()) && (untestedNodes.front()->visited)) {
+            untestedNodes.pop_front();
+        }
+
+        //If the list is empty, break out of the loop
+        if (untestedNodes.empty()) {
+            break;
+        }
+        
+        //Set The Current Node to the front of the list and set to visited
+        current = untestedNodes.front();
+        current->visited = true;
+        
+        //Check All Neighbors of The Current Node
+        for (Node* neighbor : current->neighbors) {
+            //Add Node to List if it's Not Been Visited and is Not a Obstacle
+            if (!neighbor->visited && neighbor->obstacle == false) {
+                untestedNodes.push_back(neighbor);
+            }
+
+            //Generate a Potentially Lower Local Distance Based On Distance 
+            //From current Node and The Selected neighbor
+            //Plus current->local_dist
+            float potential_low_goal = (
+                current->local_dist + distance(current, neighbor)
+            );
+
+            //Set neigbor->parent to the current Node and
+            //Set neighbor->local_dist to The Generated Value
+            if (potential_low_goal < current->local_dist) {
+                neighbor->parent = current;
+                neighbor->local_dist = potential_low_goal;
+
+                //The global_dist is a Measure of local_dist
+                //+ The Heuristic of neighbor Node and goal Node
+                neighbor->global_dist = (
+                    neighbor->local_dist + heuristic(neighbor, goal)
+                );
+            }
+        } 
+    }
+}
+
+void resetNodes(Grid& grid)
+{
+    for (int x = 0; x < grid.getSizeX(); x++) {
+        for (int y = 0; y < grid.getSizeY(); y++) {
+            grid.node_grid[x][y].visited = false;
+            grid.node_grid[x][y].global_dist = INFINITY;
+            grid.node_grid[x][y].local_dist = INFINITY;
+            grid.node_grid[x][y].parent = nullptr;
+        }
+    }
+}
+
+float distance(Node* a, Node* b)
+{
+    return sqrtf(
+        ((a->x - b->x) * ((a->x - b->x))) + ((a->y - b->y) * (a->y - b->y))
+    );
+}
+
+float heuristic(Node* a, Node* b)
+{
+    return distance(a, b);
 }

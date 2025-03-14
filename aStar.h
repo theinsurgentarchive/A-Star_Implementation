@@ -6,9 +6,14 @@ class Node
         //Node Conditionals
         bool obstacle, visited;
         
-        //Node Distance from Initial/Goal Node
-        float init_dist;
-        float goal_dist;
+        //Node Position
+        int x, y;
+        
+        //Node Distance from Initial Node
+        float local_dist;
+
+        //Node Distance from Goal Node
+        float global_dist;
         
         //Vector Matrix of Neighboring Nodes
         std::vector<Node*> neighbors;
@@ -19,8 +24,6 @@ class Node
         //Constructor
         Node();
         Node(bool);
-
-        //Function
 };
 
 //Grid of Node Elements, Used in A* Search
@@ -37,15 +40,26 @@ class Grid
         Grid();
         Grid(int, int);
 
-        //Functions
+        //Function
         void setObstacle(int, int);
         int getSizeX();
         int getSizeY();
         Node* getNode(int, int);
         void initGrid();
+        void genNeighbors();
+        
         //Destructor
         ~Grid();
 };
-        
+
 //A* Search Algorithm
-void aStar(Grid, int[2], int[2]);
+void aStar(Grid&, int[2], int[2]);
+
+//Node Refresh
+void resetNodes(Grid&);
+
+//Calculate The Distance From One Node to The Next
+float distance(Node*, Node*);
+
+//Calls distance() (May be Deprecated in The Future Due to Redundancy)
+float heuristics(Node*, Node*);
