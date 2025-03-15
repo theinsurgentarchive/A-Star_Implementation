@@ -100,7 +100,7 @@ int main(int argc, char* argv[])
         while (flag) {
             cout << "\nInput Goal Coordinate X: ";
             cin >> input;
-            if (input > 0 && input < g_x) {
+            if (input >= 0 && input < g_x) {
                 flag = false;
                 goal_node[0] = input;
             } else {
@@ -113,7 +113,7 @@ int main(int argc, char* argv[])
         while (flag) {
             cout << "\nInput Goal Coordinate Y: ";
             cin >> input;
-            if (input > 0 && input < g_x) {
+            if (input >= 0 && input < g_x) {
                 flag = false;
                 goal_node[1] = input;
             } else {
@@ -143,7 +143,7 @@ int main(int argc, char* argv[])
             while (flag) {
                 cout << "\nObstacle Coordinate X: ";
                 cin >> input;
-                if (input > 0 && input < g_x) {
+                if (input >= 0 && input < g_x) {
                     flag = false;
                     temp[0] = input;
                 } else {
@@ -156,7 +156,7 @@ int main(int argc, char* argv[])
             while (flag) {
                 cout << "\nObstacle Coordinate Y: ";
                 cin >> input;
-                if (input > 0 && input < g_y) {
+                if (input >= 0 && input < g_y) {
                     flag = false;
                     goal_node[0] = input;
                 } else {
