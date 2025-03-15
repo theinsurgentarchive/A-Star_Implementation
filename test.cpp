@@ -183,11 +183,11 @@ int main(int argc, char* argv[])
     aStar(&world, start_node, goal_node);
 
     //Set String Grid with New Values
-    evaluatePath(&world, goal_node, &console);
+    evaluatePath(&world, goal_node, console);
 
     //Print New String Grid
     cout << "A* Algorithm Complete:\n\n";
-    printGrid(&world, &console);
+    printGrid(&world, console);
     
     //Delete Console Grid
     for (int x = 0; x < g_x; x++) {
