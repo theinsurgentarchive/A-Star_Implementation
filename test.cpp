@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
     
     //Initialize Node Grid
     Grid world(g_x, g_y);
-
+    Grid* ptr = &world;
     //Initialize String Grid
     string** console = new string *[g_x];
     for (int x = 0; x < g_x; x++) {
@@ -182,14 +182,14 @@ int main(int argc, char* argv[])
     }
 
     //Run A* Algorithm
-    aStar(&world, start_node, goal_node);
+    aStar(ptr, start_node, goal_node);
 
     //Set String Grid with New Values
-    evaluatePath(&world, goal_node, console);
+    evaluatePath(ptr, goal_node, console);
 
     //Print New String Grid
     cout << "\n\nA* Algorithm Complete:\n";
-    printGrid(&world, console);
+    printGrid(ptr, console);
     
     //Delete Console Grid
     for (int x = 0; x < g_x; x++) {
@@ -210,8 +210,8 @@ void evaluatePath(Grid* grid, int node[], string** console)
     g_y = grid->getSizeY();
 
     //Check if the End Node has a path leading to it
+    cout << end_node->parent;
     if (end_node->parent != nullptr) {
-        cout << end_node->parent;
         //Check if the Current Node is Not The Start Node and Assigns a 
         //Percent Character to the Console Grid to Represent The Path
         Node* current = end_node;
