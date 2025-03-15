@@ -165,7 +165,7 @@ void aStar(Grid& grid, int begin_node[], int ending_node[])
 
     //Initialize Start Node
     start->local_dist = 0.0f;
-    start->global_dist = heuristic(start, goal);
+    start->global_dist = heuristics(start, goal);
 
     //Initialize Goal Node
     goal->local_dist = start->global_dist;
@@ -226,7 +226,7 @@ void aStar(Grid& grid, int begin_node[], int ending_node[])
                 //The global_dist is a Measure of local_dist
                 //+ The Heuristic of neighbor Node and goal Node
                 neighbor->global_dist = (
-                    neighbor->local_dist + heuristic(neighbor, goal)
+                    neighbor->local_dist + heuristics(neighbor, goal)
                 );
             }
         } 
@@ -252,7 +252,7 @@ float distance(Node* a, Node* b)
     );
 }
 
-float heuristic(Node* a, Node* b)
+float heuristics(Node* a, Node* b)
 {
     return distance(a, b);
 }
