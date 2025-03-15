@@ -188,7 +188,7 @@ int main(int argc, char* argv[])
     evaluatePath(&world, goal_node, console);
 
     //Print New String Grid
-    cout << "A* Algorithm Complete:\n\n";
+    cout << "\n\nA* Algorithm Complete:\n";
     printGrid(&world, console);
     
     //Delete Console Grid
@@ -211,6 +211,7 @@ void evaluatePath(Grid* grid, int node[], string** console)
 
     //Check if the End Node has a path leading to it
     if (end_node->parent != nullptr) {
+        cout << end_node->parent;
         //Check if the Current Node is Not The Start Node and Assigns a 
         //Percent Character to the Console Grid to Represent The Path
         Node* current = end_node;
