@@ -145,17 +145,17 @@ Grid::~Grid()
     delete [] node_grid;
 }
 
-void aStar(Grid& grid, int begin_node[], int ending_node[])
+void aStar(Grid* grid, int begin_node[], int ending_node[])
 {
 
     //Retrieve Pointer to Start Node
-    Node* start = grid.getNode(
+    Node* start = grid->getNode(
         begin_node[0],
         begin_node[1]
     );
 
     //Retrieve Pointer to Goal Node
-    Node* goal = grid.getNode(
+    Node* goal = grid->getNode(
         ending_node[0],
         ending_node[1]
     );
@@ -233,14 +233,14 @@ void aStar(Grid& grid, int begin_node[], int ending_node[])
     }
 }
 
-void resetNodes(Grid& grid)
+void resetNodes(Grid* grid)
 {
-    for (int x = 0; x < grid.getSizeX(); x++) {
-        for (int y = 0; y < grid.getSizeY(); y++) {
-            grid.node_grid[x][y].visited = false;
-            grid.node_grid[x][y].global_dist = INFINITY;
-            grid.node_grid[x][y].local_dist = INFINITY;
-            grid.node_grid[x][y].parent = nullptr;
+    for (int x = 0; x < grid->getSizeX(); x++) {
+        for (int y = 0; y < grid->getSizeY(); y++) {
+            grid->node_grid[x][y].visited = false;
+            grid->node_grid[x][y].global_dist = INFINITY;
+            grid->node_grid[x][y].local_dist = INFINITY;
+            grid->node_grid[x][y].parent = nullptr;
         }
     }
 }

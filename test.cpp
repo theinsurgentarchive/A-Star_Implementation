@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
     int g_x, g_y;
 
     //User Input
-    string input;
+    int input;
 
     //Starting & Goal Nodes
     int start_node[2], goal_node[2];
@@ -41,10 +41,10 @@ int main(int argc, char* argv[])
         g_y = 30;
     };
     
-    //Node Grid
+    //Initialize Node Grid
     Grid world(g_x, g_y);
 
-    //Print Grid
+    //Initialize String Grid
     string** console = new string *[g_x];
     for (int i = 0; i < g_x; i++) {
         console[i] = new string [g_y];
@@ -68,9 +68,119 @@ int main(int argc, char* argv[])
     }
 
     //Ask User for Starting Node:
-    cout << "\nInput Starting Coordinate: ";
-    cin >> input;
-    if ()
+    bool flag = true;
+    while (flag) {
+        cout << "\nInput Starting Coordinate X: ";
+        cin >> input;
+        if (input >= 0 && input < g_x) {
+            flag = false;
+            start_node[0] = input;
+        } else {
+            cout << "\nError: Value not within range of 0-" << to_string(g_x)
+                 << "\n\n";
+        }
+    }
+    flag = true;
+    while (flag) {
+        cout << "\nInput Starting Coordinate Y: ";
+        cin >> input;
+        if (input >= 0 && input < g_y) {
+            flag = false;
+            start_node[1] = input;
+        } else {
+            cout << "\nError: Value not within range of 0-" << to_string(g_y)
+                 << "\n\n";
+        }
+    }
+    flag = true;
+    cout << "\nStart Node Coordinates: ("
+         << start_node[0] << ", "
+         << start_node[1] << ")\n\n";
+
+    //Ask User for Goal Node:
+    bool check_start_goal = true;
+    while (check_start_goal) {
+        while (flag) {
+            cout << "\nInput Goal Coordinate X: ";
+            cin >> input;
+            if (input > 0 && input < g_x) {
+                flag = false;
+                goal_node[0] = input;
+            } else {
+                cout << "\nError: Value not within range of 0-"
+                     << to_string(g_x)
+                     << "\n\n";
+            }
+        }
+        flag = true;
+        while (flag) {
+            cout << "\nInput Goal Coordinate Y: ";
+            cin >> input;
+            if (input > 0 && input < g_x) {
+                flag = false;
+                goal_node[0] = input;
+            } else {
+                cout << "\nError: Value not within range of 0-" 
+                     << to_string(g_x)
+                     << "\n\n";
+            }
+        }
+        if (start_node[0] == goal_node[0] && start_node[1] == goal_node[1]) {
+            cout << "\nError: Cannot place start and "
+                 << "goal nodes on the same coordinate\n\n";
+        } else {
+            check_start_goal = false;
+        }
+    }
+    cout << "Goal Node Coordinates: ("
+         << goal_node[0] << ", "
+         << goal_node[1] << ")\n\n";
+    
+    //Place Obstacle Nodes
+    while (flag) {
+        cout << "\nSet New Obstacle?: YES[1] / NO[0]\n";
+        cin >> input;
+        if (input == 1) {
+            int temp[2];
+            while (flag) {
+                cout << "\nObstacle Coordinate X: ";
+                cin >> input;
+                if (input > 0 && input < g_x) {
+                    flag = false;
+                    temp[0] = input;
+                } else {
+                    cout << "\nError: Value not within range of 0-"
+                         << to_string(g_x)
+                         << "\n\n";
+                }
+            }
+            flag = true;
+            while (flag) {
+                cout << "\nObstacle Coordinate Y: ";
+                cin >> input;
+                if (input > 0 && input < g_y) {
+                    flag = false;
+                    goal_node[0] = input;
+                } else {
+                    cout << "\nError: Value not within range of 0-"
+                         << to_string(g_y)
+                         << "\n\n";
+                }
+            }
+            flag = true;
+            if ((temp[0] != start_node[0] && temp[1] != start_node[1]) &&
+                (temp[0] != goal_node[0] && temp[1] != goal_node[1])) {
+                    world.setObstacle(temp[0], temp[1]);
+            } else {
+                cout << "\nError: Obstacle Cannot Overlap"
+                     << "with Start or Goal Nodes\n\n";
+            }
+        } else if (input == 0) {
+            flag = false;
+        }
+    }
+
+    aStar(world, start_node, goal_node);
 
     //Delete Console Grid
     for (int i = 0; i < g_x; i++) {
