@@ -118,7 +118,7 @@ int main(int argc, char* argv[])
             cin >> input;
             if (input > 0 && input < g_x) {
                 flag = false;
-                goal_node[0] = input;
+                goal_node[1] = input;
             } else {
                 cout << "\nError: Value not within range of 0-" 
                      << to_string(g_x)
