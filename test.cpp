@@ -199,7 +199,7 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-void evaluatePath(Grid* grid, int node[], string*** console)
+void evaluatePath(Grid* grid, int node[], string* console)
 {
     //Initialize Variables
     int g_x, g_y;
@@ -213,14 +213,14 @@ void evaluatePath(Grid* grid, int node[], string*** console)
         //Percent Character to the Console Grid to Represent The Path
         Node* current = end_node;
         while (current->parent != nullptr) {
-            &console[current->x][current->y] = '%';
+            console[current->x][current->y] = '%';
             current = current->parent;
         }
     }
 }
 
 //Print Grid to The World
-void printGrid(Grid* grid, string*** console)
+void printGrid(Grid* grid, string* console)
 {
     int g_x, g_y;
     g_x = grid->getSizeX();
