@@ -4,8 +4,8 @@
 using namespace std;
 
 //Function Prototype
-void evaluatePath(Grid*, int[], string*);
-void printGrid(Grid*, string*);
+void evaluatePath(Grid*, int[], string**);
+void printGrid(Grid*, string**);
 
 int main(int argc, char* argv[])
 {
@@ -199,7 +199,7 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-void evaluatePath(Grid* grid, int node[], string* console)
+void evaluatePath(Grid* grid, int node[], string** console)
 {
     //Initialize Variables
     int g_x, g_y;
@@ -220,7 +220,7 @@ void evaluatePath(Grid* grid, int node[], string* console)
 }
 
 //Print Grid to The World
-void printGrid(Grid* grid, string* console)
+void printGrid(Grid* grid, string** console)
 {
     int g_x, g_y;
     g_x = grid->getSizeX();

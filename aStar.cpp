@@ -77,6 +77,9 @@ void Grid::initGrid()
         for (int y = 0; y < grid_size[1]; y++) {
             node_grid[x][y].x = x;
             node_grid[x][y].y = y;
+            node_grid[x][y].obstacle = false;
+            node_grid[x][y].visited = false;
+            node_grid[x][y].parent = nullptr;
         }
     }
 
