@@ -4,8 +4,8 @@
 using namespace std;
 
 //Function Prototype
-void evaluatePath(Grid*, int[], string***);
-void printGrid(Grid*, string***);
+void evaluatePath(Grid*, int[], string*);
+void printGrid(Grid*, string*);
 
 int main(int argc, char* argv[])
 {
