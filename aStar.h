@@ -53,10 +53,10 @@ class Grid
 };
 
 //A* Search Algorithm
-void aStar(Grid&, int[2], int[2]);
+void aStar(Grid*, int[2], int[2]);
 
 //Node Refresh
-void resetNodes(Grid&);
+void resetNodes(Grid*);
 
 //Calculate The Distance From One Node to The Next
 float distance(Node*, Node*);

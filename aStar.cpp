@@ -62,7 +62,7 @@ int Grid::getSizeY()
 //Retrieves The Node requested in the Grid
 Node* Grid::getNode(int x, int y)
 {
-    if ((grid_size[0] > x) && (grid_size[1] > y)) {
+    if ((x <= grid_size[0]) && (y <= grid_size[1])) {
         return &node_grid[x][y];
     }
 }

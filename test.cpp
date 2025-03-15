@@ -180,7 +180,7 @@ int main(int argc, char* argv[])
         }
     }
 
-    aStar(world, start_node, goal_node);
+    aStar(&world, start_node, goal_node);
 
     //Delete Console Grid
     for (int i = 0; i < g_x; i++) {
