@@ -185,7 +185,7 @@ int main(int argc, char* argv[])
     aStar(ptr, start_node, goal_node);
 
     //Set String Grid with New Values
-    evaluatePath(ptr, goal_node, console);
+    evaluatePath(ptr, start_node, console);
 
     //Print New String Grid
     cout << "\n\nA* Algorithm Complete:\n";
