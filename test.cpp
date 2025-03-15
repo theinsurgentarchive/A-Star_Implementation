@@ -32,8 +32,8 @@ int main(int argc, char* argv[])
         //Print Usage Cases if incorrect parameters
         cout << "Usage: ./astar <int Size:X> <int Size:Y>\n"
                 << "\t|OR|\n"
-                << "Usage: ./astar <int GridX> <int GridY>"
-                << "\t<int Pos1:X> <int Pos1:Y>"
+                << "Usage: ./astar <int GridX> <int GridY>\n"
+                << "\t<int Pos1:X> <int Pos1:Y>\n"
                 << "\t<int Pos2:X> <int Pos2:Y>\n";
         return 1;
     } else {
