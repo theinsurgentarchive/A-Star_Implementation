@@ -4,7 +4,8 @@
 using namespace std;
 
 //Function Prototype
-void printGrid(Grid&, string[]);
+void evaluatePath(Grid*, int[], string**);
+void printGrid(Grid*, string**);
 
 int main(int argc, char* argv[])
 {
@@ -46,23 +47,17 @@ int main(int argc, char* argv[])
 
     //Initialize String Grid
     string** console = new string *[g_x];
-    for (int i = 0; i < g_x; i++) {
-        console[i] = new string [g_y];
+    for (int x = 0; x < g_x; x++) {
+        console[x] = new string [g_y];
     }
 
     //Print Initial Grid to The World
     cout << "\nInitial Grid:\n\n";
-    for (int i = 0; i < g_x; i++) {
+    for (int x = 0; x < g_x; x++) {
         cout << "| ";
-        for (int j = 0; j < g_y; j++) {
-            if (world.node_grid[i][j].obstacle) {
-                cout << '#';
-                console[i][j] = '#';
-            } else {
-                cout << '*';
-                console[i][j] = '*';
-            }
-            cout << ' ';
+        for (int y = 0; y < g_y; y++) {
+            console[x][y] = '*';
+            cout << "* ";
         }
         cout << "|\n";
     }
@@ -76,7 +71,8 @@ int main(int argc, char* argv[])
             flag = false;
             start_node[0] = input;
         } else {
-            cout << "\nError: Value not within range of 0-" << to_string(g_x)
+            cout << "\nError: Value not within range of 0-"
+                 << to_string(g_x - 1)
                  << "\n\n";
         }
     }
@@ -88,7 +84,8 @@ int main(int argc, char* argv[])
             flag = false;
             start_node[1] = input;
         } else {
-            cout << "\nError: Value not within range of 0-" << to_string(g_y)
+            cout << "\nError: Value not within range of 0-"
+                 << to_string(g_y - 1)
                  << "\n\n";
         }
     }
@@ -108,7 +105,7 @@ int main(int argc, char* argv[])
                 goal_node[0] = input;
             } else {
                 cout << "\nError: Value not within range of 0-"
-                     << to_string(g_x)
+                     << to_string(g_x - 1)
                      << "\n\n";
             }
         }
@@ -121,13 +118,13 @@ int main(int argc, char* argv[])
                 goal_node[1] = input;
             } else {
                 cout << "\nError: Value not within range of 0-" 
-                     << to_string(g_x)
+                     << to_string(g_x - 1)
                      << "\n\n";
             }
         }
         if (start_node[0] == goal_node[0] && start_node[1] == goal_node[1]) {
             cout << "\nError: Cannot place start and "
-                 << "goal nodes on the same coordinate\n\n";
+                 << " goal nodes on the same coordinate\n\n";
         } else {
             check_start_goal = false;
         }
@@ -151,7 +148,7 @@ int main(int argc, char* argv[])
                     temp[0] = input;
                 } else {
                     cout << "\nError: Value not within range of 0-"
-                         << to_string(g_x)
+                         << to_string(g_x - 1)
                          << "\n\n";
                 }
             }
@@ -164,7 +161,7 @@ int main(int argc, char* argv[])
                     goal_node[0] = input;
                 } else {
                     cout << "\nError: Value not within range of 0-"
-                         << to_string(g_y)
+                         << to_string(g_y - 1)
                          << "\n\n";
                 }
             }
@@ -172,20 +169,29 @@ int main(int argc, char* argv[])
             if ((temp[0] != start_node[0] && temp[1] != start_node[1]) &&
                 (temp[0] != goal_node[0] && temp[1] != goal_node[1])) {
                     world.setObstacle(temp[0], temp[1]);
+                    console[temp[0]][temp[1]] = '#';
             } else {
                 cout << "\nError: Obstacle Cannot Overlap"
-                     << "with Start or Goal Nodes\n\n";
+                     << " with Start or Goal Nodes\n\n";
             }
         } else if (input == 0) {
             flag = false;
         }
     }
 
+    //Run A* Algorithm
     aStar(&world, start_node, goal_node);
 
+    //Set String Grid with New Values
+    evaluatePath(&world, goal_node, console);
+
+    //Print New String Grid
+    cout << "A* Algorithm Complete:\n\n";
+    printGrid(&world, console);
+    
     //Delete Console Grid
-    for (int i = 0; i < g_x; i++) {
-        delete [] console[i];    
+    for (int x = 0; x < g_x; x++) {
+        delete [] console[x];    
     }
     delete [] console;
     
@@ -193,16 +199,36 @@ int main(int argc, char* argv[])
     return 0;
 }
 
+void evaluatePath(Grid* grid, int node[], string** console)
+{
+    //Initialize Variables
+    int g_x, g_y;
+    Node* end_node = grid->getNode(node[0], node[1]);
+    g_x = grid->getSizeX();
+    g_y = grid->getSizeY();
+
+    //Check if the End Node has a path leading to it
+    if (end_node->parent != nullptr) {
+        //Check if the Current Node is Not The Start Node and Assigns a 
+        //Percent Character to the Console Grid to Represent The Path
+        Node* current = end_node;
+        while (current->parent != nullptr) {
+            console[current->x][current->y] = '%';
+            current = current->parent;
+        }
+    }
+}
+
 //Print Grid to The World
-void printGrid(Grid& grid_ptr, string console[])
+void printGrid(Grid* grid, string** console)
 {
     int g_x, g_y;
-    g_x = grid_ptr.getSizeX();
-    g_y = grid_ptr.getSizeY();
-    for (int i = 0; i < g_x; i++) {
+    g_x = grid->getSizeX();
+    g_y = grid->getSizeY();
+    for (int x = 0; x < g_x; x++) {
         cout << "| ";
-        for (int j = 0; j < g_y; j++) {
-            cout << console[i][j] << ' ';
+        for (int y = 0; y < g_y; y++) {
+            cout << console[x][y] << ' ';
         }
         cout << "|\n";
     }
