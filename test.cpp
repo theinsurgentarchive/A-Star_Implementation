@@ -132,6 +132,7 @@ int main(int argc, char* argv[])
             check_start_goal = false;
         }
     }
+    flag = true;
     cout << "Goal Node Coordinates: ("
          << goal_node[0] << ", "
          << goal_node[1] << ")\n\n";
