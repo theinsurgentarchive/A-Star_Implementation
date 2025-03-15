@@ -11,26 +11,30 @@ int main(int argc, char* argv[])
     //Grid Size
     int g_x, g_y;
 
+    //User Input
+    string input;
+
     //Starting & Goal Nodes
-    int init_node[2], goal_node[2];
+    int start_node[2], goal_node[2];
     
     //Set Either Grid Size or Start and Goal Nodes based on passed parameters
-    if (argc == 5) {
-        g_x = 30;
-        g_y = 30;
-        init_node[0] = stoi(argv[1]);
-        init_node[1] = stoi(argv[2]);
-        goal_node[0] = stoi(argv[3]);
-        goal_node[1] = stoi(argv[4]);
+    if (argc == 7) {
+        g_x = stoi(argv[1]);
+        g_y = stoi(argv[2]);
+        start_node[0] = stoi(argv[3]);
+        start_node[1] = stoi(argv[4]);
+        goal_node[0] = stoi(argv[5]);
+        goal_node[1] = stoi(argv[6]);
     } else if (argc == 3) {
         g_x = stoi(argv[1]);
         g_y = stoi(argv[2]);
-    } else if ((argc <= 1) || (argc == 4 || argc > 5)){
+    } else if ((argc <= 1) || (argc < 7 && argc > 3) || (argc > 7)){
         //Print Usage Cases if incorrect parameters
         cout << "Usage: ./astar <int Size:X> <int Size:Y>\n"
                 << "\t|OR|\n"
-                << "Usage: ./astar <int Pos1:X> <int Pos1:Y>"
-                << "<int Pos2:X> <int Pos2:Y>\n";
+                << "Usage: ./astar <int GridX> <int GridY>"
+                << "\t<int Pos1:X> <int Pos1:Y>"
+                << "\t<int Pos2:X> <int Pos2:Y>\n";
         return 1;
     } else {
         g_x = 30;
@@ -62,6 +66,11 @@ int main(int argc, char* argv[])
         }
         cout << "|\n";
     }
+
+    //Ask User for Starting Node:
+    cout << "\nInput Starting Coordinate: ";
+    cin >> input;
+    if ()
 
     //Delete Console Grid
     for (int i = 0; i < g_x; i++) {
