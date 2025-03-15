@@ -93,6 +93,7 @@ int main(int argc, char* argv[])
     cout << "\nStart Node Coordinates: ("
          << start_node[0] << ", "
          << start_node[1] << ")\n\n";
+    console[start_node[0]][start_node[1]] = 'S';
 
     //Ask User for Goal Node:
     bool check_start_goal = true;
@@ -133,7 +134,8 @@ int main(int argc, char* argv[])
     cout << "Goal Node Coordinates: ("
          << goal_node[0] << ", "
          << goal_node[1] << ")\n\n";
-    
+    console[goal_node[0]][goal_node[1]] = 'X';
+
     //Place Obstacle Nodes
     while (flag) {
         cout << "\nSet New Obstacle?: YES[1] / NO[0]\n";
