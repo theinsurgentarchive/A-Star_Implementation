@@ -4,8 +4,8 @@
 using namespace std;
 
 //Function Prototype
-void evaluatePath(Grid*, int[], string**);
-void printGrid(Grid*, string**);
+void evaluatePath(Grid*, int[], string***);
+void printGrid(Grid*, string***);
 
 int main(int argc, char* argv[])
 {
@@ -183,11 +183,11 @@ int main(int argc, char* argv[])
     aStar(&world, start_node, goal_node);
 
     //Set String Grid with New Values
-    evaluatePath(&world, goal_node, console);
+    evaluatePath(&world, goal_node, &console);
 
     //Print New String Grid
     cout << "A* Algorithm Complete:\n\n";
-    printGrid(&world, console);
+    printGrid(&world, &console);
     
     //Delete Console Grid
     for (int x = 0; x < g_x; x++) {
@@ -199,7 +199,7 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-void evaluatePath(Grid* grid, int node[], string** console)
+void evaluatePath(Grid* grid, int node[], string*** console)
 {
     //Initialize Variables
     int g_x, g_y;
@@ -213,14 +213,14 @@ void evaluatePath(Grid* grid, int node[], string** console)
         //Percent Character to the Console Grid to Represent The Path
         Node* current = end_node;
         while (current->parent != nullptr) {
-            console[current->x][current->y] = '%';
+            &console[current->x][current->y] = '%';
             current = current->parent;
         }
     }
 }
 
 //Print Grid to The World
-void printGrid(Grid* grid, string** console)
+void printGrid(Grid* grid, string*** console)
 {
     int g_x, g_y;
     g_x = grid->getSizeX();
