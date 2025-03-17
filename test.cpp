@@ -58,16 +58,16 @@ int main(int argc, char* argv[])
         goal_node[1] = 20;
 
         //Initialize Default Obstacle Examples
+        obstacle[0][1] = 14;
         obstacle[0][0] = 14;
-        obstacle[0][1] = 15;
+        obstacle[1][1] = 15;
         obstacle[1][0] = 14;
-        obstacle[1][1] = 14;
-        obstacle[2][0] = 16;
-        obstacle[2][1] = 15;
-        obstacle[3][0] = 17;
-        obstacle[3][1] = 14;
-        obstacle[3][0] = 18;
-        obstacle[3][1] = 15;
+        obstacle[2][1] = 16;
+        obstacle[2][0] = 14;
+        obstacle[3][1] = 17;
+        obstacle[3][0] = 14;
+        obstacle[3][1] = 18;
+        obstacle[3][0] = 14;
 
         //Enable Default Mode
         default_mode = true;
