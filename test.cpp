@@ -86,10 +86,6 @@ int main(int argc, char* argv[])
     for (int x = 0; x < g_x; x++) {
         console[x] = new string [g_y];
     }
-    if (default_mode) {
-        console[start_node[0]][start_node[1]] = 'S';
-        console[goal_node[0]][goal_node[1]] = 'X';
-    }
 
     //Print Initial Grid to The World
     cout << "\nInitial Grid:\n\n";
@@ -229,6 +225,11 @@ int main(int argc, char* argv[])
 
     //Set String Grid with New Values
     evaluatePath(ptr, start_node, goal_node, console);
+    
+    if (default_mode) {
+        console[start_node[0]][start_node[1]] = 'S';
+        console[goal_node[0]][goal_node[1]] = 'X';
+    }
 
     //Print New String Grid
     cout << "\n\nA* Algorithm Complete:\n";
