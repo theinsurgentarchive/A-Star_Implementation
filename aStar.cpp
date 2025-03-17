@@ -217,7 +217,7 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
         current->visited = true;
         
         //Check All Neighbors of The Current Node
-        for (Node* neighbor : current.neighbors) {
+        for (Node* neighbor : current->neighbors) {
             //Add Node to List if it's Not Been Visited and is Not a Obstacle
             if (!neighbor->visited && neighbor->obstacle == false) {
                 untestedNodes.push_back(neighbor);
