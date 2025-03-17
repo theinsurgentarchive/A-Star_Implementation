@@ -248,9 +248,9 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
     if (start_node->parent != nullptr) {
         //Check if the Current Node is Not The Start Node and Assigns a 
         //Percent Character to the Console Grid to Represent The Path
-        int number = 0;
+        //int number = 0;
         while (current->parent != nullptr) {
-            cout << to_string(++number) << endl;
+            //cout << to_string(++number) << endl;
             console[current->x][current->y] = '%';
             current = current->parent;
         }
