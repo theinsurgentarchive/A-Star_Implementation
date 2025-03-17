@@ -5,9 +5,9 @@
 using namespace std;
 
 //Function Prototype
-void evaluatePath(Grid*, int[], int[], string**);
+void evaluatePath(Grid*, int[], int[], char**);
 void checkVisitedSpaces(Grid*);
-void printGrid(Grid*, string**);
+void printGrid(Grid*, char**);
 
 int main(int argc, char* argv[])
 {
@@ -82,8 +82,8 @@ int main(int argc, char* argv[])
             world.setObstacle(obstacle[i][0], obstacle[i][0]);
         }
     }
-    //Initialize String Grid
-    string** console = new string *[g_x];
+    //Initialize Character Grid
+    char** console = new string *[g_x];
     for (int x = 0; x < g_x; x++) {
         console[x] = new string [g_y];
     }
@@ -242,7 +242,7 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-void evaluatePath(Grid* grid, int start[], int end[], string** console)
+void evaluatePath(Grid* grid, int start[], int end[], char** console)
 {
     //Initialize Variables
     int g_x, g_y;
@@ -311,16 +311,37 @@ void checkVisitedSpaces(Grid* grid)
 }
 
 //Print Grid to The World
-void printGrid(Grid* grid, string** console)
+void printGrid(Grid* grid, char** console)
 {
     int g_x, g_y;
     g_x = grid->getSizeX();
     g_y = grid->getSizeY();
+    
+    //Initialize Console Color Handler
+    HANDLE hconsole;
+    hconsole = GetStdHandle(STD_OUTPUT_HANDLE);
     for (int x = 0; x < g_x; x++) {
         cout << "| ";
         for (int y = 0; y < g_y; y++) {
-            switch (console[x][y])
+            SetConsoleTextAttribute(hconsole, 15);
+            //Set Text Color to Blue If '%'
+            if (console[x][y] == '%') {
+                SetConsoleTextAttribute(hconsole, 9);
+            }
+
+            //Set Text Color to Yellow If '0'
+            if (console[x][y] == '0') {
+                SetConsoleTextAttribute(hconsole, 14);
+            }
+
+            //Set Text Color to Magenta If Either 'X' or 'S'
+            if (console[x][y] == 'X' || console[x][y] == 'S') {
+                SetConsoleTextAttribute(hconsole, 13)
+            }
+
+            //Print Spacing and Reset Color
             cout << console[x][y] << ' ';
+            SetConsoleTextAttribute(hconsole, 15)
         }
         cout << "|\n";
     }
