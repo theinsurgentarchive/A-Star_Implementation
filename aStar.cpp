@@ -235,14 +235,14 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
                 ) {
                     Node* checkPath = neighbor;
                     bool valid = true;
-                    //while (checkPath != nullptr && valid) {
-                    //    if ((checkPath->parent == current) ||
-                    //        (checkPath->parent == start)
-                    //    ) {
-                    //        valid = false;
-                    //    }
-                    //    checkPath = checkPath->parent;
-                    //}
+                    while (checkPath != nullptr && valid) {
+                        if ((checkPath->parent == current) ||
+                            (checkPath->parent == start)
+                        ) {
+                            valid = false;
+                        }
+                        checkPath = checkPath->parent;
+                    }
                     if (valid) {
                         neighbor->parent = current;
                         neighbor->local_dist = potential_low_goal;
