@@ -228,10 +228,10 @@ void printGrid(Grid* grid, string** console)
     int g_x, g_y;
     g_x = grid->getSizeX();
     g_y = grid->getSizeY();
-    for (int y = 0; y < g_y; y++) {
+    for (int x = (g_x - 1); x >= 0; x--) {
         cout << "| ";
-        for (int x = (g_x - 1); x >= 0; x--) {
-            cout << console[y][x] << ' ';
+        for (int y = (g_y - 1); y >= 0; y--) {
+            cout << console[x][y] << ' ';
         }
         cout << "|\n";
     }
