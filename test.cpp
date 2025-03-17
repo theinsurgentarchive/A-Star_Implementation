@@ -51,11 +51,11 @@ int main(int argc, char* argv[])
 
         //Initialize Default X Values
         start_node[0] = 3;
-        goal_node[0] = 3;
+        goal_node[0] = 25;
 
         //Initialize Default Y Values
         start_node[1] = 13;
-        goal_node[1] = 13;
+        goal_node[1] = 20;
 
         //Initialize Default Obstacle Examples
         obstacle[0][0] = 14;
