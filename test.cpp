@@ -1,13 +1,12 @@
 #include <iostream>
 #include <string>
 #include "aStar.h"
-#include <windows.h>
 using namespace std;
 
 //Function Prototype
-void evaluatePath(Grid*, int[], int[], char**);
+void evaluatePath(Grid*, int[], int[], string**);
 void checkVisitedSpaces(Grid*);
-void printGrid(Grid*, char**);
+void printGrid(Grid*, string**);
 
 int main(int argc, char* argv[])
 {
@@ -83,7 +82,7 @@ int main(int argc, char* argv[])
         }
     }
     //Initialize Character Grid
-    char** console = new string *[g_x];
+    string** console = new string *[g_x];
     for (int x = 0; x < g_x; x++) {
         console[x] = new string [g_y];
     }
@@ -232,6 +231,30 @@ int main(int argc, char* argv[])
     cout << "\n\nA* Algorithm Complete:\n";
     printGrid(ptr, console);
     
+    printf("\n");
+    printf("\x1B[31mTexting\033[0m\t\t");
+    printf("\x1B[32mTexting\033[0m\t\t");
+    printf("\x1B[33mTexting\033[0m\t\t");
+    printf("\x1B[34mTexting\033[0m\t\t");
+    printf("\x1B[35mTexting\033[0m\n");
+    
+    printf("\x1B[36mTexting\033[0m\t\t");
+    printf("\x1B[36mTexting\033[0m\t\t");
+    printf("\x1B[36mTexting\033[0m\t\t");
+    printf("\x1B[37mTexting\033[0m\t\t");
+    printf("\x1B[93mTexting\033[0m\n");
+    
+    printf("\033[3;42;30mTexting\033[0m\t\t");
+    printf("\033[3;43;30mTexting\033[0m\t\t");
+    printf("\033[3;44;30mTexting\033[0m\t\t");
+    printf("\033[3;104;30mTexting\033[0m\t\t");
+    printf("\033[3;100;30mTexting\033[0m\n");
+
+    printf("\033[3;47;35mTexting\033[0m\t\t");
+    printf("\033[2;47;35mTexting\033[0m\t\t");
+    printf("\033[1;47;35mTexting\033[0m\t\t");
+    printf("\t\t");
+    printf("\n");
     //Delete Console Grid
     for (int x = 0; x < g_x; x++) {
         delete [] console[x];    
@@ -242,7 +265,7 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-void evaluatePath(Grid* grid, int start[], int end[], char** console)
+void evaluatePath(Grid* grid, int start[], int end[], string** console)
 {
     //Initialize Variables
     int g_x, g_y;
@@ -311,37 +334,33 @@ void checkVisitedSpaces(Grid* grid)
 }
 
 //Print Grid to The World
-void printGrid(Grid* grid, char** console)
+void printGrid(Grid* grid, string** console)
 {
     int g_x, g_y;
     g_x = grid->getSizeX();
     g_y = grid->getSizeY();
     
-    //Initialize Console Color Handler
-    HANDLE hconsole;
-    hconsole = GetStdHandle(STD_OUTPUT_HANDLE);
     for (int x = 0; x < g_x; x++) {
         cout << "| ";
         for (int y = 0; y < g_y; y++) {
-            SetConsoleTextAttribute(hconsole, 15);
+            
             //Set Text Color to Blue If '%'
-            if (console[x][y] == '%') {
-                SetConsoleTextAttribute(hconsole, 9);
+            if (console[x][y] == "%") {
+                
             }
 
             //Set Text Color to Yellow If '0'
-            if (console[x][y] == '0') {
-                SetConsoleTextAttribute(hconsole, 14);
+            if (console[x][y] == "0") {
+                
             }
 
             //Set Text Color to Magenta If Either 'X' or 'S'
-            if (console[x][y] == 'X' || console[x][y] == 'S') {
-                SetConsoleTextAttribute(hconsole, 13)
+            if (console[x][y] == "X" || console[x][y] == "S") {
+                console[x][y] = "\3" + console[x][y];
             }
 
             //Print Spacing and Reset Color
-            cout << console[x][y] << ' ';
-            SetConsoleTextAttribute(hconsole, 15)
+            cout << console[x][y] << " ";
         }
         cout << "|\n";
     }
