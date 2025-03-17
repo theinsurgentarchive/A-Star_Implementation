@@ -237,11 +237,13 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
 
             //Set neigbor->parent to the current Node and
             //Set neighbor->local_dist to The Generated Value
-            if (potential_low_goal < current->local_dist) {
+            if (potential_low_goal > current->local_dist) {
                 if (neighbor->parent == nullptr && (neighbor->parent != current)) {
                     neighbor->parent = current;
                     neighbor->local_dist = potential_low_goal;
-
+                    if (neighbor == goal) {
+                        return;
+                    }
                     //The global_dist is a Measure of local_dist
                     //+ The Heuristic of neighbor Node and goal Node
                     neighbor->global_dist = (
