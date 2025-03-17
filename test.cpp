@@ -93,6 +93,12 @@ int main(int argc, char* argv[])
         cout << "| ";
         for (int y = 0; y < g_y; y++) {
             console[x][y] = '*';
+            if (x = start_node[0] && y == start_node[1]) {
+                console[x][y] = 'S';
+            }
+            if (x = goal_node[0] && y == goal_node[1]) {
+                console[x][y] = 'X';
+            }
             cout << "* ";
         }
         cout << "|\n";
