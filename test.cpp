@@ -186,7 +186,7 @@ int main(int argc, char* argv[])
     aStar(ptr, start_node, goal_node);
 
     //Set String Grid with New Values
-    evaluatePath(ptr, start_node, console);
+    evaluatePath(ptr, goal_node, console);
 
     //Print New String Grid
     cout << "\n\nA* Algorithm Complete:\n";
@@ -210,12 +210,26 @@ void evaluatePath(Grid* grid, int node[], string** console)
     g_x = grid->getSizeX();
     g_y = grid->getSizeY();
 
+    //Initialize Current Node to The Start Node
+    Node* current = start_node;
+
+    //Set All Visited Nodes That Are Not The Start, to '&' Characters
+    for (int x = 0; x < g_x; x++) {
+        cout << "| ";
+        for (int y = 0; y < g_y; y++) {
+            if (grid->node_grid[x][y].visited &&
+                (!(start_node == grid->getNode(x, y)))
+            ) {
+                console[x][y] = '&';
+            }
+        }
+    }
+
     //Check if the End Node has a path leading to it
     cout << start_node->parent;
     if (start_node->parent != nullptr) {
         //Check if the Current Node is Not The Start Node and Assigns a 
         //Percent Character to the Console Grid to Represent The Path
-        Node* current = start_node;
         while (current->parent != nullptr) {
             console[current->x][current->y] = '%';
             current = current->parent;
@@ -229,10 +243,10 @@ void checkVisitedSpaces(Grid* grid)
     int g_x, g_y;
     g_x = grid->getSizeX();
     g_y = grid->getSizeY();
-    for (int x = (g_x - 1); x >= 0; x--) {
+    for (int x = 0; x < g_x; x++) {
         cout << "| ";
         for (int y = 0; y < g_y; y++) {
-            cout << grid->node_grid[y][x].visited << ' ';
+            cout << grid->node_grid[x][y].visited << ' ';
         }
         cout << "|\n";
     }
@@ -245,10 +259,10 @@ void printGrid(Grid* grid, string** console)
     int g_x, g_y;
     g_x = grid->getSizeX();
     g_y = grid->getSizeY();
-    for (int x = (g_x - 1); x >= 0; x--) {
+    for (int x = 0; x < g_x; x++) {
         cout << "| ";
         for (int y = 0; y < g_y; y++) {
-            cout << console[y][x] << ' ';
+            cout << console[x][y] << ' ';
         }
         cout << "|\n";
     }
