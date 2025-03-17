@@ -257,7 +257,7 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
         cout << current << "=>\n";
         
     }
-    cout << "\nNode Trace Successful!!!\n\n"
+    cout << "\nNode Trace Successful!!!\n\n";
     //if (goal_node->parent != nullptr) {
     //    //Check if the Current Node is Not The Start Node and Assigns a 
     //    //Percent Character to the Console Grid to Represent The Path
