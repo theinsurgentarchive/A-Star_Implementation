@@ -216,6 +216,11 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
         current = untestedNodes.front();
         current->visited = true;
         
+        //Check If The Current Node is The Goal Node
+        if (current == goal) {
+            return;
+        }
+
         //Check All Neighbors of The Current Node
         for (Node* neighbor : current->neighbors) {
             //Add Node to List if it's Not Been Visited and is Not a Obstacle
