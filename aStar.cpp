@@ -186,7 +186,6 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
 
     //Set Current Node to the Start Node
     Node* current = start;
-    current->visited = false;
 
     //Initialize Array of Untested Nodes
     std::list<Node*> untestedNodes;
