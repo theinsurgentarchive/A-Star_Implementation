@@ -4,7 +4,7 @@
 using namespace std;
 
 //Function Prototype
-void evaluatePath(Grid*, int[], string**);
+void evaluatePath(Grid*, int[], int[], string**);
 void checkVisitedSpaces(Grid*);
 void printGrid(Grid*, string**);
 
@@ -205,23 +205,23 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-void evaluatePath(Grid* grid, int node[], string** console)
+void evaluatePath(Grid* grid, int start[], int end[], string** console)
 {
     //Initialize Variables
     int g_x, g_y;
-    Node* start_node = grid->getNode(node[0], node[1]);
+    Node* start_node = grid->getNode(start[0], start[1]);
+    Node* goal_node = grid->getNode(end[0], end[1]);
     g_x = grid->getSizeX();
     g_y = grid->getSizeY();
-
     //Initialize Current Node to The Start Node
     Node* current = start_node;
 
     //Set All Visited Nodes That Are Not The Start, to '&' Characters
     for (int x = 0; x < g_x; x++) {
-        cout << "| ";
         for (int y = 0; y < g_y; y++) {
             if (grid->node_grid[x][y].visited &&
-                (!(start_node == grid->getNode(x, y)))
+                ((start_node != grid->getNode(x, y)) &&
+                (goal_node == grid->getNode(x,y)))
             ) {
                 console[x][y] = '&';
             }
@@ -233,6 +233,7 @@ void evaluatePath(Grid* grid, int node[], string** console)
     if (start_node->parent != nullptr) {
         //Check if the Current Node is Not The Start Node and Assigns a 
         //Percent Character to the Console Grid to Represent The Path
+        int number = 0;
         while (current->parent != nullptr) {
             console[current->x][current->y] = '%';
             current = current->parent;
