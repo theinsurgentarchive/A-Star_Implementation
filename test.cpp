@@ -244,9 +244,10 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
     }
 
     //Check if the End Node has a path leading to it
+    cout << "Start Node Address: " << start_node << "\n\n";
     cout << goal_node << "=>\n";
     int iterations = 0;
-    while (current != nullptr) {
+    while (current != nullptr && current != start_node) {
         if (++iterations > 50) {
             cout << "\n\nInfinite Loop Detected, Max Iteration Exceeded\n\n";
             return;
