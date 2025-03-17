@@ -140,6 +140,11 @@ void Grid::genNeighbors()
     }
 }
 
+bool Grid::hasNeighbors(Node* node)
+{
+    return (node->neighbors.empty() == false);
+}
+
 Grid::~Grid()
 {
     for (int x = 0; x < grid_size[0]; x++) {
@@ -165,6 +170,11 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
 
     //Reset All Nodes to Default
     resetNodes(grid);
+
+    //Check if the Node has Neighbors
+    if (!grid->hasNeighbors(start)) {
+        return;
+    }
 
     //Initialize Start Node
     start->local_dist = 0.0f;
@@ -207,7 +217,7 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
         current->visited = true;
         
         //Check All Neighbors of The Current Node
-        for (Node* neighbor : current->neighbors) {
+        for (Node* neighbor : current.neighbors) {
             //Add Node to List if it's Not Been Visited and is Not a Obstacle
             if (!neighbor->visited && neighbor->obstacle == false) {
                 untestedNodes.push_back(neighbor);

@@ -47,6 +47,7 @@ class Grid
         Node* getNode(int, int);
         void initGrid();
         void genNeighbors();
+        bool hasNeighbors(Node*);
         
         //Destructor
         ~Grid();
