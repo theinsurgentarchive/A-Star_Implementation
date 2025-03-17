@@ -258,14 +258,14 @@ void resetNodes(Grid* grid)
     }
 }
 
-float distance(Node* a, Node* b)
+int distance(Node* a, Node* b)
 {
     return sqrtf(
         ((a->x - b->x) * ((a->x - b->x))) + ((a->y - b->y) * (a->y - b->y))
     );
 }
 
-float heuristics(Node* a, Node* b)
+int heuristics(Node* a, Node* b)
 {
     return distance(a, b);
 }

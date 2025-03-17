@@ -18,6 +18,9 @@ int main(int argc, char* argv[])
 
     //Starting & Goal Nodes
     int start_node[2], goal_node[2];
+
+    //Is The Program Running in Default Mode?
+    bool default_mode = false;
     
     //Set Either Grid Size or Start and Goal Nodes based on passed parameters
     if (argc == 7) {
@@ -30,7 +33,7 @@ int main(int argc, char* argv[])
     } else if (argc == 3) {
         g_x = stoi(argv[1]);
         g_y = stoi(argv[2]);
-    } else if ((argc <= 1) || (argc < 7 && argc > 3) || (argc > 7)){
+    } else if ((argc == 2) || (argc < 7 && argc > 3) || (argc > 7)){
         //Print Usage Cases if incorrect parameters
         cout << "Usage: ./astar <int Size:X> <int Size:Y>\n"
                 << "\t|OR|\n"
@@ -39,8 +42,20 @@ int main(int argc, char* argv[])
                 << "\t<int Pos2:X> <int Pos2:Y>\n";
         return 1;
     } else {
+        //Initialize Default Grid Size
         g_x = 30;
         g_y = 30;
+
+        //Initialize Default X Values
+        start_node[0] = 3;
+        goal_node[0] = 3;
+
+        //Initialize Default Y Values
+        start_node[1] = 13;
+        goal_node[1] = 13;
+
+        //Enable Default Mode
+        default_mode = true;
     };
     
     //Initialize Node Grid
