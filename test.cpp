@@ -230,7 +230,7 @@ void printGrid(Grid* grid, string** console)
     g_y = grid->getSizeY();
     for (int x = (g_x - 1); x >= 0; x--) {
         cout << "| ";
-        for (int y = (g_y - 1); y >= 0; y--) {
+        for (int y = 0; y < g_y; y++) {
             cout << console[x][y] << ' ';
         }
         cout << "|\n";
