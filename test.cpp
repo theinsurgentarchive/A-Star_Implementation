@@ -252,10 +252,12 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
             cout << "\n\nInfinite Loop Detected, Max Iteration Exceeded\n\n";
             return;
         }
+        console[current->x][current->y] = '%';
         current = current->parent;
         cout << current << "=>\n";
         
     }
+    cout << "\nNode Trace Successful!!!\n\n"
     //if (goal_node->parent != nullptr) {
     //    //Check if the Current Node is Not The Start Node and Assigns a 
     //    //Percent Character to the Console Grid to Represent The Path
