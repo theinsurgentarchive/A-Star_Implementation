@@ -229,7 +229,7 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
     g_x = grid->getSizeX();
     g_y = grid->getSizeY();
     //Initialize Current Node to The Start Node
-    Node* current = start_node;
+    Node* current = goal_node;
 
     //Set All Visited Nodes That Are Not The Start, to '1' Characters
     for (int x = 0; x < g_x; x++) {
@@ -244,8 +244,8 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
     }
 
     //Check if the End Node has a path leading to it
-    cout << start_node->parent;
-    if (start_node->parent != nullptr) {
+    cout << goal_node->parent;
+    if (goal_node->parent != nullptr) {
         //Check if the Current Node is Not The Start Node and Assigns a 
         //Percent Character to the Console Grid to Represent The Path
         //int number = 0;
