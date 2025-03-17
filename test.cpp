@@ -169,8 +169,8 @@ int main(int argc, char* argv[])
                 }
             }
             flag = true;
-            if ((temp[0] != start_node[0] && temp[1] != start_node[1]) &&
-                (temp[0] != goal_node[0] && temp[1] != goal_node[1])) {
+            if ((temp[0] != start_node[0] || temp[1] != start_node[1]) &&
+                (temp[0] != goal_node[0] || temp[1] != goal_node[1])) {
                     world.setObstacle(temp[0], temp[1]);
                     console[temp[0]][temp[1]] = '#';
             } else {
