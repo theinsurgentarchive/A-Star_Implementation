@@ -180,10 +180,6 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
     start->local_dist = 0.0f;
     start->global_dist = heuristics(start, goal);
 
-    //Initialize Goal Node
-    //goal->local_dist = start->global_dist;
-    //start->global_dist = 0.0f;
-
     //Set Current Node to the Start Node
     Node* current = start;
 
@@ -233,17 +229,21 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
             //Set neigbor->parent to the current Node and
             //Set neighbor->local_dist to The Generated Value
             if (potential_low_goal > current->local_dist) {
-                if (neighbor->parent == nullptr && (neighbor->parent != current)) {
+                if ((neighbor->parent == nullptr) &&
+                    (neighbor->parent != current)) {
                     neighbor->parent = current;
                     neighbor->local_dist = potential_low_goal;
-                    if (neighbor == goal) {
-                        return;
-                    }
+
                     //The global_dist is a Measure of local_dist
                     //+ The Heuristic of neighbor Node and goal Node
                     neighbor->global_dist = (
                         neighbor->local_dist + heuristics(neighbor, goal)
                     );
+
+                    //If Neighboring Node is Goal Node, Exit Algorithm
+                    if (neighbor == goal) {
+                        return;
+                    }
                 }
             }
         } 

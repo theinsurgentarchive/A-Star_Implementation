@@ -112,8 +112,8 @@ int main(int argc, char* argv[])
     console[start_node[0]][start_node[1]] = 'S';
 
     //Ask User for Goal Node:
-    bool check_start_goal = true;
-    while (check_start_goal) {
+    bool flag2 = true;
+    while (flag2) {
         while (flag) {
             cout << "\nInput Goal Coordinate X: ";
             cin >> input;
@@ -143,7 +143,7 @@ int main(int argc, char* argv[])
             cout << "\nError: Cannot place start and "
                  << " goal nodes on the same coordinate\n\n";
         } else {
-            check_start_goal = false;
+            flag2 = false;
         }
     }
     flag = true;
@@ -231,14 +231,14 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
     //Initialize Current Node to The Start Node
     Node* current = start_node;
 
-    //Set All Visited Nodes That Are Not The Start, to '&' Characters
+    //Set All Visited Nodes That Are Not The Start, to '1' Characters
     for (int x = 0; x < g_x; x++) {
         for (int y = 0; y < g_y; y++) {
             if (grid->node_grid[x][y].visited &&
                 ((start_node != grid->getNode(x, y)) &&
                 (goal_node != grid->getNode(x,y)))
             ) {
-                console[x][y] = '0';
+                console[x][y] = '1';
             }
         }
     }
@@ -250,6 +250,7 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
         //Percent Character to the Console Grid to Represent The Path
         int number = 0;
         while (current->parent != nullptr) {
+            cout << to_string(++number) << endl;
             console[current->x][current->y] = '%';
             current = current->parent;
         }
