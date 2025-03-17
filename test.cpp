@@ -346,6 +346,6 @@ void printGrid(Grid* grid, string** console)
 
             cout << console[x][y] << " ";
         }
-        cout << "\x1b[97m|\033[0m\n";
+        cout << "|\n";
     }
 }
