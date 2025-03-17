@@ -230,31 +230,7 @@ int main(int argc, char* argv[])
     //Print New String Grid
     cout << "\n\nA* Algorithm Complete:\n";
     printGrid(ptr, console);
-    
-    printf("\n");
-    printf("\x1B[31mTexting\033[0m\t\t");
-    printf("\x1B[32mTexting\033[0m\t\t");
-    printf("\x1B[33mTexting\033[0m\t\t");
-    printf("\x1B[34mTexting\033[0m\t\t");
-    printf("\x1B[35mTexting\033[0m\n");
-    
-    printf("\x1B[36mTexting\033[0m\t\t");
-    printf("\x1B[36mTexting\033[0m\t\t");
-    printf("\x1B[36mTexting\033[0m\t\t");
-    printf("\x1B[37mTexting\033[0m\t\t");
-    printf("\x1B[93mTexting\033[0m\n");
-    
-    printf("\033[3;42;30mTexting\033[0m\t\t");
-    printf("\033[3;43;30mTexting\033[0m\t\t");
-    printf("\033[3;44;30mTexting\033[0m\t\t");
-    printf("\033[3;104;30mTexting\033[0m\t\t");
-    printf("\033[3;100;30mTexting\033[0m\n");
 
-    printf("\033[3;47;35mTexting\033[0m\t\t");
-    printf("\033[2;47;35mTexting\033[0m\t\t");
-    printf("\033[1;47;35mTexting\033[0m\t\t");
-    printf("\t\t");
-    printf("\n");
     //Delete Console Grid
     for (int x = 0; x < g_x; x++) {
         delete [] console[x];    
@@ -343,25 +319,28 @@ void printGrid(Grid* grid, string** console)
     for (int x = 0; x < g_x; x++) {
         cout << "| ";
         for (int y = 0; y < g_y; y++) {
-            
+            //Set Text Color to White If '*'
+            if (console[x][y] == "*") {
+                console[x][y] = "\x1B[97m" + console[x][y] + "\033[0m";
+            }
+
             //Set Text Color to Blue If '%'
             if (console[x][y] == "%") {
-                
+                console[x][y] = "\x1B[34m" + console[x][y] + "\033[0m";
             }
 
             //Set Text Color to Yellow If '0'
             if (console[x][y] == "0") {
-                
+                console[x][y] = "\x1B[33m" + console[x][y] + "\033[0m";
             }
 
             //Set Text Color to Magenta If Either 'X' or 'S'
             if (console[x][y] == "X" || console[x][y] == "S") {
-                console[x][y] = "\3" + console[x][y];
+                console[x][y] = "\x1B[35m" + console[x][y] + "\033[0m";
             }
 
-            //Print Spacing and Reset Color
             cout << console[x][y] << " ";
         }
-        cout << "|\n";
+        cout << "\x1b[97m|\033[0m\n";
     }
 }
