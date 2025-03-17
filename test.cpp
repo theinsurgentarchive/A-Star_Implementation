@@ -75,12 +75,12 @@ int main(int argc, char* argv[])
     
     //Initialize Node Grid
     Grid world(g_x, g_y);
-    Grid* ptr = &world;
     if (default_mode) {
         for (int i = 0; i < 4; i++) {
             world.setObstacle(obstacle[i][0], obstacle[i][1]);
         }
     }
+
     //Initialize Character Grid
     string** console = new string *[g_x];
     for (int x = 0; x < g_x; x++) {
@@ -97,6 +97,8 @@ int main(int argc, char* argv[])
         }
         cout << "|\n";
     }
+
+    //If There Are No Command Line Inputs, Don't Run User Input Requests
     if (!default_mode) {
         //Ask User for Starting Node:
         bool flag = true;
@@ -217,15 +219,17 @@ int main(int argc, char* argv[])
             }
         }
     }
+
     //Run A* Algorithm
-    aStar(ptr, start_node, goal_node);
+    aStar(&world, start_node, goal_node);
 
     //Check All Node Grid Visited Booleans
-    checkVisitedSpaces(ptr);
+    checkVisitedSpaces(&world);
 
     //Set String Grid with New Values
-    evaluatePath(ptr, start_node, goal_node, console);
+    evaluatePath(&world, start_node, goal_node, console);
     
+    //Set All Character Symbols For Special Nodes if Default Mode
     if (default_mode) {
         console[start_node[0]][start_node[1]] = 'S';
         console[goal_node[0]][goal_node[1]] = 'X';
@@ -236,7 +240,7 @@ int main(int argc, char* argv[])
 
     //Print New String Grid
     cout << "\n\nA* Algorithm Complete:\n";
-    printGrid(ptr, console);
+    printGrid(&world, console);
 
     //Delete Console Grid
     for (int x = 0; x < g_x; x++) {
