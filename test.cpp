@@ -245,16 +245,16 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
 
     //Check if the End Node has a path leading to it
     cout << goal_node->parent;
-    if (goal_node->parent != nullptr) {
-        //Check if the Current Node is Not The Start Node and Assigns a 
-        //Percent Character to the Console Grid to Represent The Path
-        //int number = 0;
-        while (current->parent != nullptr) {
-            //cout << to_string(++number) << endl;
-            console[current->x][current->y] = '%';
-            current = current->parent;
-        }
-    }
+    //if (goal_node->parent != nullptr) {
+    //    //Check if the Current Node is Not The Start Node and Assigns a 
+    //    //Percent Character to the Console Grid to Represent The Path
+    //    //int number = 0;
+    //    while (current->parent != nullptr) {
+    //        //cout << to_string(++number) << endl;
+    //        console[current->x][current->y] = '%';
+    //        current = current->parent;
+    //    }
+    //}
 }
 
 void checkVisitedSpaces(Grid* grid)
