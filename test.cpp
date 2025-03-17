@@ -229,6 +229,9 @@ int main(int argc, char* argv[])
     if (default_mode) {
         console[start_node[0]][start_node[1]] = 'S';
         console[goal_node[0]][goal_node[1]] = 'X';
+        for (int i = 0; i < 4; i++) {
+            console[obstacle[i][0]][obstacle[i][1]] = '#';
+        }
     }
 
     //Print New String Grid
