@@ -171,8 +171,8 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
     start->global_dist = heuristics(start, goal);
 
     //Initialize Goal Node
-    goal->local_dist = start->global_dist;
-    start->global_dist = 0.0f;
+    //goal->local_dist = start->global_dist;
+    //start->global_dist = 0.0f;
 
     //Set Current Node to the Start Node
     Node* current = start;
