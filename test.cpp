@@ -247,7 +247,7 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
     cout << goal_node;
     int iterations = 0;
     while (current != nullptr) {
-        if (iterations > 50) {
+        if (++iterations > 50) {
             cout << "\n\nInfinite Loop Detected, Max Iteration Exceeded\n\n";
             return;
         }
