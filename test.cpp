@@ -231,7 +231,7 @@ void printGrid(Grid* grid, string** console)
     for (int x = (g_x - 1); x >= 0; x--) {
         cout << "| ";
         for (int y = 0; y < g_y; y++) {
-            cout << console[x][y] << ' ';
+            cout << console[y][x] << ' ';
         }
         cout << "|\n";
     }
