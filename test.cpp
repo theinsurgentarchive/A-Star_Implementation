@@ -332,7 +332,7 @@ void printGrid(Grid* grid, string** console)
         for (int y = 0; y < g_y; y++) {
             //Set Text Color to White If '*'
             if (console[x][y] == "*") {
-                console[x][y] = "\x1B[97m" + console[x][y] + "\033[0m";
+                console[x][y] = "\x1B[37m" + console[x][y] + "\033[0m";
             }
 
             //Set Text Color to Blue If '%'
