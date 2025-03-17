@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
     Grid* ptr = &world;
     if (default_mode) {
         for (int i = 0; i < 4; i++) {
-            world.setObstacle(obstacle[i][0], obstacle[i][0]);
+            world.setObstacle(obstacle[i][0], obstacle[i][1]);
         }
     }
     //Initialize Character Grid
