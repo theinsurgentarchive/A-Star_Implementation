@@ -326,7 +326,12 @@ void printGrid(Grid* grid, string** console)
 
             //Set Text Color to Blue If '%'
             if (console[x][y] == "%") {
-                console[x][y] = "\x1B[34m" + console[x][y] + "\033[0m";
+                console[x][y] = "\x1B[94m" + console[x][y] + "\033[0m";
+            }
+
+            //Set Text Color to Red If '#'
+            if (console[x][y] == "#") {
+                console[x][y] = "\x1B[91m" + console[x][y] + "\033[0m";
             }
 
             //Set Text Color to Yellow If '0'
@@ -336,7 +341,7 @@ void printGrid(Grid* grid, string** console)
 
             //Set Text Color to Magenta If Either 'X' or 'S'
             if (console[x][y] == "X" || console[x][y] == "S") {
-                console[x][y] = "\x1B[35m" + console[x][y] + "\033[0m";
+                console[x][y] = "\x1B[95m" + console[x][y] + "\033[0m";
             }
 
             cout << console[x][y] << " ";
