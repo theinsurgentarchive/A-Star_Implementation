@@ -244,7 +244,7 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
     }
 
     //Check if the End Node has a path leading to it
-    cout << goal_node;
+    cout << goal_node << "=>\n";
     int iterations = 0;
     while (current != nullptr) {
         if (++iterations > 50) {
