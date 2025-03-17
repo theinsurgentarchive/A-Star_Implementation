@@ -238,7 +238,7 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
                 ((start_node != grid->getNode(x, y)) &&
                 (goal_node != grid->getNode(x,y)))
             ) {
-                console[x][y] = '1';
+                console[x][y] = '0';
             }
         }
     }
@@ -252,7 +252,9 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
             cout << "\n\nInfinite Loop Detected, Max Iteration Exceeded\n\n";
             return;
         }
-        console[current->x][current->y] = '%';
+        if (current != goal_node) {
+            console[current->x][current->y] = '%';
+        }
         current = current->parent;
         cout << current << "=>\n";
         
