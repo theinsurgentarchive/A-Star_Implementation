@@ -228,9 +228,7 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
 
             //Set neigbor->parent to the current Node and
             //Set neighbor->local_dist to The Generated Value
-            if ((potential_low_goal >= current->local_dist) &&
-                (neighbor->parent != current->parent)
-            ) {
+            if (potential_low_goal >= current->local_dist) {
                 if ((neighbor->parent == nullptr) &&
                     (neighbor->parent != current)) {
                     neighbor->parent = current;
