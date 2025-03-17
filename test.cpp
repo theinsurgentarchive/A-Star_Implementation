@@ -59,15 +59,15 @@ int main(int argc, char* argv[])
 
         //Initialize Default Obstacle Examples
         obstacle[0][0] = 14;
-        obstacle[0][1] = 0;
+        obstacle[0][1] = 15;
         obstacle[1][0] = 15;
-        obstacle[1][1] = 0;
+        obstacle[1][1] = 14;
         obstacle[2][0] = 16;
-        obstacle[2][1] = 0;
+        obstacle[2][1] = 15;
         obstacle[3][0] = 17;
-        obstacle[3][1] = 0;
+        obstacle[3][1] = 14;
         obstacle[3][0] = 18;
-        obstacle[3][1] = 0;
+        obstacle[3][1] = 15;
 
         //Enable Default Mode
         default_mode = true;
