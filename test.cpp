@@ -86,6 +86,10 @@ int main(int argc, char* argv[])
     for (int x = 0; x < g_x; x++) {
         console[x] = new string [g_y];
     }
+    if (default_mode) {
+        console[start_node[0]][start_node[1]] = 'S';
+        console[goal_node[0]][goal_node[1]] = 'X';
+    }
 
     //Print Initial Grid to The World
     cout << "\nInitial Grid:\n\n";
@@ -97,7 +101,6 @@ int main(int argc, char* argv[])
         }
         cout << "|\n";
     }
-
     if (!default_mode) {
         //Ask User for Starting Node:
         bool flag = true;
