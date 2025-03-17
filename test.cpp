@@ -185,6 +185,9 @@ int main(int argc, char* argv[])
     //Run A* Algorithm
     aStar(ptr, start_node, goal_node);
 
+    //Check All Node Grid Visited Booleans
+    checkVisitedSpaces(ptr);
+
     //Set String Grid with New Values
     evaluatePath(ptr, goal_node, console);
 
