@@ -190,6 +190,9 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
     //Initialize Array of Untested Nodes
     std::list<Node*> untestedNodes;
     untestedNodes.push_back(start);
+    for (Node* neighbor : start->neighbors) {
+        untestedNodes.push_back(neighbor);
+    }
 
     //Primary Algorithm Loop
     while (!untestedNodes.empty()) {
