@@ -5,6 +5,7 @@ using namespace std;
 
 //Function Prototype
 void evaluatePath(Grid*, int[], string**);
+void checkVisitedSpaces(Grid*);
 void printGrid(Grid*, string**);
 
 int main(int argc, char* argv[])
@@ -205,21 +206,37 @@ void evaluatePath(Grid* grid, int node[], string** console)
 {
     //Initialize Variables
     int g_x, g_y;
-    Node* end_node = grid->getNode(node[0], node[1]);
+    Node* start_node = grid->getNode(node[0], node[1]);
     g_x = grid->getSizeX();
     g_y = grid->getSizeY();
 
     //Check if the End Node has a path leading to it
-    cout << end_node->parent;
-    if (end_node->parent != nullptr) {
+    cout << start_node->parent;
+    if (start_node->parent != nullptr) {
         //Check if the Current Node is Not The Start Node and Assigns a 
         //Percent Character to the Console Grid to Represent The Path
-        Node* current = end_node;
+        Node* current = start_node;
         while (current->parent != nullptr) {
             console[current->x][current->y] = '%';
             current = current->parent;
         }
     }
+}
+
+void checkVisitedSpaces(Grid* grid)
+{
+    cout << "\n\n";
+    int g_x, g_y;
+    g_x = grid->getSizeX();
+    g_y = grid->getSizeY();
+    for (int x = (g_x - 1); x >= 0; x--) {
+        cout << "| ";
+        for (int y = 0; y < g_y; y++) {
+            cout << grid->node_grid[y][x].visited << ' ';
+        }
+        cout << "|\n";
+    }
+    cout << "\n\n";
 }
 
 //Print Grid to The World
