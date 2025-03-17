@@ -244,7 +244,11 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
     }
 
     //Check if the End Node has a path leading to it
-    cout << goal_node->parent;
+    cout << goal_node;
+    while (current != nullptr) {
+        current = current->parent;
+        cout << current << "=>\n";
+    }
     //if (goal_node->parent != nullptr) {
     //    //Check if the Current Node is Not The Start Node and Assigns a 
     //    //Percent Character to the Console Grid to Represent The Path
