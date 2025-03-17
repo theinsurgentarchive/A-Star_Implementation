@@ -223,7 +223,7 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
                 ((start_node != grid->getNode(x, y)) &&
                 (goal_node != grid->getNode(x,y)))
             ) {
-                console[x][y] = '&';
+                console[x][y] = '0';
             }
         }
     }
