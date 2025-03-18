@@ -226,6 +226,7 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
                 current->local_dist + distance(current, neighbor)
             );
 
+            //If the current local is smaller than the potential,
             //Set neigbor->parent to the current Node and
             //Set neighbor->local_dist to The Generated Value
             if (potential_low_goal > current->local_dist) {
@@ -233,26 +234,6 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
                     (neighbor->parent != current) &&
                     (neighbor->parent != start)
                 ) {
-                    //Node* checkPath = neighbor;
-                    //bool valid = true;
-                    //while (checkPath != nullptr && valid) {
-                    //    if ((checkPath->parent == current) ||
-                    //        (checkPath->parent == start)
-                    //    ) {
-                    //        valid = false;
-                    //    }
-                    //    checkPath = checkPath->parent;
-                    //}
-                    //if (valid) {
-                    //    neighbor->parent = current;
-                    //    neighbor->local_dist = potential_low_goal;
-//
-                    //    //The global_dist is a Measure of local_dist
-                    //    //+ The Heuristic of neighbor Node and goal Node
-                    //    neighbor->global_dist = (
-                    //        neighbor->local_dist + heuristics(neighbor, goal)
-                    //    );
-                    //}
                     neighbor->parent = current;
                     neighbor->local_dist = potential_low_goal;
 
