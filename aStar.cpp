@@ -233,26 +233,34 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
                     (neighbor->parent != current) &&
                     (neighbor->parent != start)
                 ) {
-                    Node* checkPath = neighbor;
-                    bool valid = true;
-                    while (checkPath != nullptr && valid) {
-                        if ((checkPath->parent == current) ||
-                            (checkPath->parent == start)
-                        ) {
-                            valid = false;
-                        }
-                        checkPath = checkPath->parent;
-                    }
-                    if (valid) {
-                        neighbor->parent = current;
-                        neighbor->local_dist = potential_low_goal;
+                    //Node* checkPath = neighbor;
+                    //bool valid = true;
+                    //while (checkPath != nullptr && valid) {
+                    //    if ((checkPath->parent == current) ||
+                    //        (checkPath->parent == start)
+                    //    ) {
+                    //        valid = false;
+                    //    }
+                    //    checkPath = checkPath->parent;
+                    //}
+                    //if (valid) {
+                    //    neighbor->parent = current;
+                    //    neighbor->local_dist = potential_low_goal;
+//
+                    //    //The global_dist is a Measure of local_dist
+                    //    //+ The Heuristic of neighbor Node and goal Node
+                    //    neighbor->global_dist = (
+                    //        neighbor->local_dist + heuristics(neighbor, goal)
+                    //    );
+                    //}
+                    neighbor->parent = current;
+                    neighbor->local_dist = potential_low_goal;
 
-                        //The global_dist is a Measure of local_dist
-                        //+ The Heuristic of neighbor Node and goal Node
-                        neighbor->global_dist = (
-                            neighbor->local_dist + heuristics(neighbor, goal)
-                        );
-                    }
+                    //The global_dist is a Measure of local_dist
+                    //+ The Heuristic of neighbor Node and goal Node
+                    neighbor->global_dist = (
+                        neighbor->local_dist + heuristics(neighbor, goal)
+                    );
 
                     //If Neighboring Node is Goal Node, Exit Algorithm
                     if (neighbor == goal) {
