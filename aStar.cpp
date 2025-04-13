@@ -1,6 +1,7 @@
 #include "aStar.h"
 #include <cmath>
 #include <list>
+#include <iostream>
 
 Node::Node()
 {
@@ -239,6 +240,7 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
                 ) {
                     neighbor->parent = current;
                     current->child = neighbor;
+                    cout << current->child << endl;
                     neighbor->local_dist = potential_low_goal;
 
                     //The global_dist is a Measure of local_dist
