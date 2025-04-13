@@ -268,7 +268,7 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
         for (int y = 0; y < g_y; y++) {
             if (grid->node_grid[x][y].visited &&
                 ((start_node != grid->getNode(x, y)) &&
-                (goal_node != grid->getNode(x,y)))
+                (goal_node != grid->getNode(x, y)))
             ) {
                 console[x][y] = '0';
             }
@@ -289,7 +289,7 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
             console[current->x][current->y] = '%';
         }
         current = current->child;
-        cout << current << "=>\n";
+        cout << current << "=>" << current->child << '\n';
         
     }
     cout << "\nNode Trace Successful!!!\n\n";
