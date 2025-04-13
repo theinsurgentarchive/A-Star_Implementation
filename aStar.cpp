@@ -240,7 +240,7 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
                 ) {
                     neighbor->parent = current;
                     current->child = neighbor;
-                    std::cout << current->child << endl;
+                    std::cout << current->child << std::endl;
                     neighbor->local_dist = potential_low_goal;
 
                     //The global_dist is a Measure of local_dist
