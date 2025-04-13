@@ -20,6 +20,7 @@ class Node
         
         //Node Directly Preceding Current Node
         Node* parent;
+        Node* child;
         
         //Constructor
         Node();

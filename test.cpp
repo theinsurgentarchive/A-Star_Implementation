@@ -261,9 +261,9 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
     g_x = grid->getSizeX();
     g_y = grid->getSizeY();
     //Initialize Current Node to The Start Node
-    Node* current = goal_node;
+    Node* current = start_node;
 
-    //Set All Visited Nodes That Are Not The Start, to '1' Characters
+    //Set All Visited Nodes That Are Not The Start, to '0' Characters
     for (int x = 0; x < g_x; x++) {
         for (int y = 0; y < g_y; y++) {
             if (grid->node_grid[x][y].visited &&
@@ -285,24 +285,14 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
             cout << "\n\nInfinite Loop Detected, Max Iteration Exceeded\n\n";
             return;
         }
-        if (current != goal_node) {
+        if (current != start_node) {
             console[current->x][current->y] = '%';
         }
-        current = current->parent;
+        current = current->child;
         cout << current << "=>\n";
         
     }
     cout << "\nNode Trace Successful!!!\n\n";
-    //if (goal_node->parent != nullptr) {
-    //    //Check if the Current Node is Not The Start Node and Assigns a 
-    //    //Percent Character to the Console Grid to Represent The Path
-    //    //int number = 0;
-    //    while (current->parent != nullptr) {
-    //        //cout << to_string(++number) << endl;
-    //        console[current->x][current->y] = '%';
-    //        current = current->parent;
-    //    }
-    //}
 }
 
 void checkVisitedSpaces(Grid* grid)

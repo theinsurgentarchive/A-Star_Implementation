@@ -10,6 +10,7 @@ Node::Node()
     local_dist = 0;
     global_dist = 0;
     parent = nullptr;
+    child = nullptr;
 }
 
 Node::Node(bool isObstacle)
@@ -20,6 +21,7 @@ Node::Node(bool isObstacle)
     local_dist = 0;
     global_dist = 0;
     parent = nullptr;
+    child = nullptr;
 }
 
 Grid::Grid()
@@ -80,6 +82,7 @@ void Grid::initGrid()
             node_grid[x][y].obstacle = false;
             node_grid[x][y].visited = false;
             node_grid[x][y].parent = nullptr;
+            node_grid[x][y].child = nullptr;
         }
     }
 
@@ -235,6 +238,7 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
                     (neighbor->parent != start)
                 ) {
                     neighbor->parent = current;
+                    current->child = neighbor;
                     neighbor->local_dist = potential_low_goal;
 
                     //The global_dist is a Measure of local_dist
@@ -261,6 +265,7 @@ void resetNodes(Grid* grid)
             grid->node_grid[x][y].global_dist = INFINITY;
             grid->node_grid[x][y].local_dist = INFINITY;
             grid->node_grid[x][y].parent = nullptr;
+            grid->node_grid[x][y].child = nullptr;
         }
     }
 }
