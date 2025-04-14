@@ -250,6 +250,7 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
                         while (current->parent != nullptr) {
                             current->parent->child = current;
                             current = current->parent;
+                            std::cout << current << std::endl;
                         }
                         return;
                     }
