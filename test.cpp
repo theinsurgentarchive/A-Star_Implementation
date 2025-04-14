@@ -261,7 +261,7 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
     g_x = grid->getSizeX();
     g_y = grid->getSizeY();
     //Initialize Current Node to The Start Node
-    Node* current = start_node;
+    Node* current = goal_node;
 
     //Set All Visited Nodes That Are Not The Start, to '0' Characters
     for (int x = 0; x < g_x; x++) {
@@ -280,15 +280,15 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
     cout << "End Node Address: " << goal_node << "\n\n";
     int iterations = 0;
     int max_iter = (grid->getSizeX() * grid->getSizeY());
-    while (current != nullptr && current != goal_node) {
+    while (current != nullptr && current != start_node) {
         if (++iterations > max_iter) {
             cout << "\n\nInfinite Loop Detected, Max Iteration Exceeded\n\n";
             return;
         }
-        if (current != start_node) {
+        if (current != goal_node) {
             console[current->x][current->y] = '%';
         }
-        current = current->child;
+        current = current->parent;
         cout << current << ": ";
         if (current != nullptr) {
             cout << current->x << ", " << current->y << endl;
