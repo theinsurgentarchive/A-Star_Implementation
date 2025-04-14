@@ -276,8 +276,8 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
     }
 
     //Check if the End Node has a path leading to it
-    cout << "Start Node Address: " << start_node << "\n\n";
-    cout << start_node << "=>\n";
+    cout << "Start Node Address: " << start_node << endl;
+    cout << "End Node Address: " << goal_node << "\n\n";
     int iterations = 0;
     int max_iter = (grid->getSizeX() * grid->getSizeY());
     while (current != nullptr && current != goal_node) {
@@ -289,7 +289,6 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
             console[current->x][current->y] = '%';
         }
         current = current->child;
-        cout << current->parent << " => ";
         cout << current << endl;
         
     }
