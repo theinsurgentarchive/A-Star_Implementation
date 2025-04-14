@@ -291,6 +291,7 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
         current = current->child;
         cout << current << ": ";
         if (current != nullptr) {
+            cout << current->parent->x << ", " << current->parent->y << endl;
             cout << current->x << ", " << current->y << endl;
         } else {
             cout << ": NULLPTR\n";
