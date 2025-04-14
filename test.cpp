@@ -261,7 +261,7 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
     g_x = grid->getSizeX();
     g_y = grid->getSizeY();
     //Initialize Current Node to The Start Node
-    Node* current = goal_node;
+    Node* current = start_node;
 
     //Set All Visited Nodes That Are Not The Start, to '0' Characters
     for (int x = 0; x < g_x; x++) {

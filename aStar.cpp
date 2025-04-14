@@ -251,6 +251,7 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
                         while (current->parent != nullptr) {
                             if (current->parent == prev) {
                                 std::cout << "Inf Loop Detected." << std::endl;
+                                start->child = current;
                                 return;
                             }
                             current->parent->child = current;
