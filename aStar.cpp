@@ -246,9 +246,15 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
 
                     //If Neighboring Node is Goal Node, Exit Algorithm
                     if (neighbor == goal) {
-                        current = neighbor->parent;
+                        current = neighbor;
+                        auto prev = neighbor;
                         while (current->parent != nullptr) {
+                            if (current->parent == prev) {
+                                std::cout << "Inf Loop Detected." << endl;
+                                return;
+                            }
                             current->parent->child = current;
+                            prev = current;
                             current = current->parent;
                             std::cout << current << std::endl;
                         }
