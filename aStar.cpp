@@ -234,13 +234,8 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
             //Set neigbor->parent to the current Node and
             //Set neighbor->local_dist to The Generated Value
             if (potential_low_goal > current->local_dist) {
-                if ((neighbor->parent == nullptr) &&
-                    (neighbor->parent != current) &&
-                    (neighbor->parent != start)
-                ) {
+                if ((neighbor->parent == nullptr)) {
                     neighbor->parent = current;
-                    current->child = neighbor;
-                    std::cout << current->child << std::endl;
                     neighbor->local_dist = potential_low_goal;
 
                     //The global_dist is a Measure of local_dist
@@ -254,6 +249,7 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
                         return;
                     }
                 }
+                current->child = neighbor;
             }
         } 
     }
