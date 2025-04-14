@@ -5,12 +5,12 @@ quick:
 
 ifdef QUICK
 a_star: test.cpp aStar.cpp
-	@g++ test.cpp aStar.cpp -o a_star
+	@g++ test.cpp aStar.cpp -g -o a_star
 	./astar
 
 else
 a_star: test.cpp aStar.cpp
-	g++ test.cpp aStar.cpp -o a_star
+	g++ test.cpp aStar.cpp -g -o a_star
 
 endif
 
