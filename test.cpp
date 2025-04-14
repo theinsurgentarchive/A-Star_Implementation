@@ -289,12 +289,8 @@ void evaluatePath(Grid* grid, int start[], int end[], string** console)
             console[current->x][current->y] = '%';
         }
         current = current->child;
-        cout << current;
-        if (current->child != nullptr) {
-            cout << " => " << current->child << endl;
-        } else {
-            cout << endl;
-        }
+        cout << current->parent " => ";
+        cout << current << endl;
         
     }
     cout << "\nNode Trace Successful!!!\n\n";
