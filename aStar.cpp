@@ -236,6 +236,7 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
             if (potential_low_goal > current->local_dist) {
                 if ((neighbor->parent == nullptr)) {
                     neighbor->parent = current;
+                    current->child = neighbor;
                     neighbor->local_dist = potential_low_goal;
 
                     //The global_dist is a Measure of local_dist
@@ -246,19 +247,7 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
 
                     //If Neighboring Node is Goal Node, Exit Algorithm
                     if (neighbor == goal) {
-                        current = neighbor;
-                        Node* prev = neighbor;
-                        while (current->parent != nullptr) {
-                            if (current->parent == prev) {
-                                std::cout << "Inf Loop Detected." << std::endl;
-                                start->child = current;
-                                return;
-                            }
-                            current->parent->child = current;
-                            prev = current;
-                            current = current->parent;
-                            std::cout << current << std::endl;
-                        }
+                        current->child = goal;
                         return;
                     }
                 }
