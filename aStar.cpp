@@ -246,10 +246,14 @@ void aStar(Grid* grid, int begin_node[], int ending_node[])
 
                     //If Neighboring Node is Goal Node, Exit Algorithm
                     if (neighbor == goal) {
+                        current = neighbor;
+                        while (current->parent != nullptr) {
+                            current->parent->child = current;
+                            current = current->parent;
+                        }
                         return;
                     }
                 }
-                current->child = neighbor;
             }
         } 
     }
